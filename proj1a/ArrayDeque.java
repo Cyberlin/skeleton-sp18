@@ -117,10 +117,20 @@ public class ArrayDeque<T> {
         }
     }
     public T get(int index) {
-        int cur = head;
-        for (int i = 0; i < index; i++) {
-            cur = dec(cur, items.length);
+        if (index > items.length) {
+            return null;
         }
+        int cur = head;
+        if (items[inc(head, items.length)] == null) {
+            for (int i = 0; i < index; i++) {
+                cur = dec(cur, items.length);
+            }
+        } else {
+            for (int i = 0; i < index; i++) {
+                cur=inc(cur, items.length)
+            }
+        } 
+        
         return (T) items[cur];
     }
     public boolean isEmpty(){

@@ -127,10 +127,10 @@ public class ArrayDeque<T> {
             }
         } else {
             for (int i = 0; i < index; i++) {
-                cur=inc(cur, items.length)
+                cur = inc(cur, items.length);
             }
         } 
-        
+
         return (T) items[cur];
     }
     public boolean isEmpty(){

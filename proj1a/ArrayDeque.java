@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 public class ArrayDeque<T> {
     private final int EXPAND_SCALE =2;
@@ -63,7 +64,7 @@ public class ArrayDeque<T> {
     //tail指向即将添加的而head指向第一个,两者需要有隔着一个差别
     public void addFirst(T item) {
         if (item == null) {
-           return;
+            return;
         }
         items[head = (dec(head, items.length))]=item;
         size++;
@@ -73,7 +74,7 @@ public class ArrayDeque<T> {
     }
     public void addLast(T item) {
         if (item == null) {
-          return ;
+            return;
         }
         items[tail] = item;
         size++;
@@ -83,7 +84,7 @@ public class ArrayDeque<T> {
     }
     public T removeFirst() {
         if (size == 0) {
-           return ;
+            return null;
         } else {
             int oldCapacity = items.length;
             double ratio = 1.0;

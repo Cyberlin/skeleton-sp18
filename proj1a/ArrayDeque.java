@@ -1,10 +1,6 @@
-import org.testng.IModuleFactory;
-
 import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
-public class ArrayDeque<E> {
+public class ArrayDeque<T> {
     private final int EXPAND_SCALE =2;
     private final int DEFAULT_CAPACITY = 8;
     private final int MIN_CAPACITY = 64;
@@ -33,7 +29,7 @@ public class ArrayDeque<E> {
 
     private void grow(int newCapacity) {
         if (newCapacity - Integer.MAX_VALUE > 0) {
-            throw new OutOfMemoryError();
+            return ;
         }
         int oldCapacity = items.length;
         final Object[] es = items = Arrays.copyOf(items, newCapacity);
@@ -65,9 +61,9 @@ public class ArrayDeque<E> {
         tail = head + size;
     }
     //tail指向即将添加的而head指向第一个,两者需要有隔着一个差别
-    public void addFirst(E item) {
+    public void addFirst(T item) {
         if (item == null) {
-            throw new NullPointerException();
+           return;
         }
         items[head = (dec(head, items.length))]=item;
         size++;
@@ -75,9 +71,9 @@ public class ArrayDeque<E> {
             grow(EXPAND_SCALE * items.length);
         }
     }
-    public void addLast(E item) {
+    public void addLast(T item) {
         if (item == null) {
-            throw new NullPointerException();
+          return ;
         }
         items[tail] = item;
         size++;
@@ -85,9 +81,9 @@ public class ArrayDeque<E> {
             grow(EXPAND_SCALE * items.length);
         }
     }
-    public E removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
-            throw new InputMismatchException("size is 0");
+           return ;
         } else {
             int oldCapacity = items.length;
             double ratio = 1.0;
@@ -99,10 +95,10 @@ public class ArrayDeque<E> {
             size--;
             items[head] = null;
             head = inc(head, items.length);
-            return (E) es;
+            return (T) es;
         }
     }
-    public E removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         } else {
@@ -115,16 +111,16 @@ public class ArrayDeque<E> {
             final Object es = items[tail = (dec(tail, items.length))];
             items[tail] = null;
             size--;
-            return (E) es;
+            return (T) es;
 
         }
     }
-    public E get(int index) {
+    public T get(int index) {
         int cur = head;
         for (int i = 0; i < index; i++) {
             cur = dec(cur, items.length);
         }
-        return (E) items[cur];
+        return (T) items[cur];
     }
     public boolean isEmpty(){
         return (size == 0);

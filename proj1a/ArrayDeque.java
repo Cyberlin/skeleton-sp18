@@ -117,11 +117,11 @@ public class ArrayDeque<T> {
         }
     }
     public T get(int index) {
-        if (index > items.length) {
+        if (index > size) {
             return null;
         }
         int cur = head;
-        if (items[inc(head, items.length)] == null) {
+    /*    if (items[inc(head, items.length)] == null) {
             for (int i = 0; i < index; i++) {
                 cur = dec(cur, items.length);
             }
@@ -129,9 +129,8 @@ public class ArrayDeque<T> {
             for (int i = 0; i < index; i++) {
                 cur = inc(cur, items.length);
             }
-        } 
-
-        return (T) items[cur];
+        }*/
+        return (T) items[(cur + index) % items.length];
     }
     public boolean isEmpty(){
         return (size == 0);
